@@ -4,7 +4,39 @@
     </div>
     <div class="card mt-2">
         <div class="card-header">
-            <input type="text" class="form-control" wire:model="search" placeholder="Ingrese el nombre a buscar">
+            {{-- <input type="text" class="form-control" wire:model="search" placeholder="Ingrese el nombre a buscar">
+            <select name="" id="" wire:model="tipo">
+                @foreach ($tipos_busqueda as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select> --}}
+            <div class="input-group  mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Username"
+                    aria-describedby="basic-addon1" wire:model="search">
+            </div>
+
+            <div class="input-group ">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Estado</span>
+                </div>
+                <select name="" id="" wire:model="tipo" class="form-control">
+                    @foreach ($this->tipos_busqueda as $llave => $valor)
+                        <option value="{{ $llave }}">{{ $valor }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-end my-2">
+                <button wire:click="export('xlsx')" wire.loading.attr="disabled" class="btn btn-success">
+                    EXCEL <i class="fa fa-file-excel"></i>
+                </button>
+                <button wire:click="export('pdf')" wire.loading.attr="disabled" class="btn btn-info ml-2">
+                    PDF <i class="fa fa-file-pdf"></i>
+                </button>
+            </div>
         </div>
         @if ($users->count())
             <div class="card-body">
@@ -14,10 +46,15 @@
                             <tr class="text-center">
                                 <th>{{ __('ID') }}</th>
                                 <th>{{ __('Nombre') }}</th>
+                                <th>{{ __('Apellido') }}</th>
                                 <th>{{ __('Email') }}</th>
-                                <th>{{ __('Fecha Creación') }}</th>
-                                <th>{{ __('Fecha Actualización') }}</th>
-                                <th colspan="2">Acciones</th>
+                                @if ($this->tipo == 0)
+                                    <th>{{ __('Fecha Creación') }}</th>
+                                    <th>{{ __('Fecha Actualización') }}</th>
+                                    <th colspan="2">Acciones</th>
+                                @else
+                                    <th>{{ __('Fecha Eliminado') }}</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -25,15 +62,21 @@
                                 <tr>
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $user->lastname }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->created_at }}</td>
-                                    <td>{{ $user->updated_at }}</td>
-                                    <td>
-                                        <a class="btn btn-info"
-                                            href="{{ Route('admin.users.edit', $user->id) }}">Editar</a>
-                                    </td>
-                                    <td><button class="btn btn-danger"
-                                            wire:click="$emit('deleteUser',{{ $user->id }})">Eliminar</button></td>
+                                    @if ($this->tipo == 0)
+                                        <td>{{ $user->created_at }}</td>
+                                        <td>{{ $user->updated_at }}</td>
+                                        <td>
+                                            <a class="btn btn-info"
+                                                href="{{ Route('admin.users.edit', $user->id) }}">Editar</a>
+                                        </td>
+                                        <td><button class="btn btn-danger"
+                                                wire:click="$emit('deleteUser',{{ $user->id }})">Eliminar</button>
+                                        </td>
+                                    @else
+                                        <td>{{ $user->deleted_at }}</td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

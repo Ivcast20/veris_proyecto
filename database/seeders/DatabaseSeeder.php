@@ -25,12 +25,14 @@ class DatabaseSeeder extends Seeder
 
         $admin = User::create([
             'name' => 'Admin',
+            'lastname' => 'Admin',
             'email' => 'ivan20cast@gmail.com',
             'password' => 'Pa$$w0rdV3r1s'
         ])->assignRole('admin');
 
         $director = User::create([
             'name' => 'Director',
+            'lastname' => 'Director',
             'email' => 'ivanfrancisco_20@outlook.com',
             'password' => 'Director123-'])->assignRole('director');
 

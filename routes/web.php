@@ -40,3 +40,11 @@ Route::middleware([
     ->names('admin.roles');
     
 });
+
+Route::middleware(['auth:sactum',
+    config('jetstream.auth_session'),
+    'verfied'
+    ])->group(function () {
+    //Rutas para exportar usuarios en excel y pdf
+    Route::get('excel/users', [UserController::class,'exportExcel'])->name('excel.users');
+});

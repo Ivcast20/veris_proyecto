@@ -24,6 +24,12 @@
                 @enderror
             </div>
             <div class="form-group">
+                {!! Form::label('lastname', 'Apellido') !!}
+                {!! Form::text('lastname', null, ['class' => 'form-control']) !!}
+                @error('lastname')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            <div class="form-group">
                 {!! Form::label('email', 'Correo Electrónico') !!}
                 {!! Form::email('email', null, ['class' => 'form-control']) !!}
                 @error('email')

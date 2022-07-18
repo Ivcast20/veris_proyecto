@@ -122,7 +122,7 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
+    'classes_brand' => 'bg-primary',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
@@ -250,9 +250,17 @@ return [
             'icon' => 'fas fa-tachometer-alt',
         ],
         [
+            'header' => 'Administración'
+        ],
+        [
             'text' => 'Usuarios',
             'route'  => 'admin.users.index',
             'icon' => 'fas fa-users',
+        ],
+        [
+            'text' => 'Roles',
+            'route'  => 'admin.roles.index',
+            'icon' => 'fas fa-user-tag',
         ],
         [
             'text'        => 'pages',

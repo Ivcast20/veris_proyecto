@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Jetstream\Rules\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +34,9 @@ Route::middleware([
     Route::resource('users', UserController::class)
     ->only(['index','create','store','edit','update'])
     ->names('admin.users');
+
+    Route::resource('roles', RoleController::class)
+    ->only(['index','create','store','edit','update'])
+    ->names('admin.roles');
     
 });

@@ -3,11 +3,11 @@
 @section('title', 'Users')
 
 @section('content_header')
-    <h1 class="text-center">Lista de Usuarios</h1>
+    <h1 class="text-center">Lista de Roles</h1>
 @stop
 
 @section('content')
-    @livewire('show-users')
+   @livewire('show-roles')
 @stop
 
 @section('css')

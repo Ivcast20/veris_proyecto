@@ -12,6 +12,7 @@
                     <table class="table">
                         <thead class="table-primary">
                             <tr class="text-center">
+                                <th>{{ __('ID') }}</th>
                                 <th>{{ __('Nombre') }}</th>
                                 <th>{{ __('Email') }}</th>
                                 <th>{{ __('Fecha Creación') }}</th>
@@ -22,6 +23,7 @@
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
+                                    <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->created_at }}</td>

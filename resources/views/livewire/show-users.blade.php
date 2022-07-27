@@ -28,18 +28,17 @@
                     @endforeach
                 </select>
             </div>
-
-            <div class="d-flex justify-content-end my-2">
-                <button wire:click="export('xlsx')" wire.loading.attr="disabled" class="btn btn-success">
-                    EXCEL <i class="fa fa-file-excel"></i>
-                </button>
-                <button wire:click="export('pdf')" wire.loading.attr="disabled" class="btn btn-info ml-2">
-                    PDF <i class="fa fa-file-pdf"></i>
-                </button>
-            </div>
         </div>
         @if ($users->count())
             <div class="card-body">
+                <div class="d-flex justify-content-end my-2">
+                    <button wire:click="export('xlsx')" wire.loading.attr="disabled" class="btn btn-success">
+                        EXCEL <i class="fa fa-file-excel"></i>
+                    </button>
+                    <button wire:click="export('pdf')" wire.loading.attr="disabled" class="btn btn-info ml-2">
+                        PDF <i class="fa fa-file-pdf"></i>
+                    </button>
+                </div>
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="table-primary">
@@ -65,8 +64,8 @@
                                     <td>{{ $user->lastname }}</td>
                                     <td>{{ $user->email }}</td>
                                     @if ($this->tipo == 0)
-                                        <td>{{ $user->created_at }}</td>
-                                        <td>{{ $user->updated_at }}</td>
+                                        <td>{{ $user->created_at->format('d/m/Y') }}</td>
+                                        <td>{{ $user->updated_at->format('d/m/Y') }}</td>
                                         <td>
                                             <a class="btn btn-info"
                                                 href="{{ Route('admin.users.edit', $user->id) }}">Editar</a>
@@ -75,7 +74,7 @@
                                                 wire:click="$emit('deleteUser',{{ $user->id }})">Eliminar</button>
                                         </td>
                                     @else
-                                        <td>{{ $user->deleted_at }}</td>
+                                        <td>{{ $user->deleted_at->format('d/m/Y') }}</td>
                                     @endif
                                 </tr>
                             @endforeach

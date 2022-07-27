@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SaveUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
 
@@ -42,7 +41,7 @@ class UserController extends Controller
     {
         $nuevoUsuario = User::create($request->validated());
         $nuevoUsuario->assignRole($request->roles);
-        return view('admin.users.index')->with('message', 'Usuario creado correctamente');
+        return redirect()->route('admin.users.index')->with('message', 'Usuario creado correctamente');
     }
 
 
@@ -69,7 +68,7 @@ class UserController extends Controller
     {
         $user->update($request->all());
         $user->roles()->sync($request->roles);
-        return redirect()->route('admin.users.edit', compact('user'))->with('success', 'Se ha editado correctamente');
+        return redirect()->route('admin.users.edit', compact('user'))->with('message', 'Se ha editado correctamente');
     }
 
 }

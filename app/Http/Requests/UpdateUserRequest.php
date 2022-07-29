@@ -3,11 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class SaveUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
-    //Validaciones para un nuevo usuario
+    //Validaciones para un editar usuario
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,8 +27,7 @@ class SaveUserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => ['required','string',Password::min(8)->mixedCase()->numbers()->symbols()],
+            'email' => 'required|string|email|max:255',
             'roles' => 'required|array',
         ];
     }
@@ -38,7 +36,6 @@ class SaveUserRequest extends FormRequest
     {
         return [
             'roles.required' => 'Elija al menos un rol',
-            'email.unique' => 'El correo electrónico ya está en uso',
         ];
     }
 }

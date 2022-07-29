@@ -19,7 +19,7 @@ use Laravel\Jetstream\Rules\Role;
 
 
 Route::middleware([
-    'auth:sanctum',
+    'auth', //Antes estaba como auth:sanctum auth:web
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {

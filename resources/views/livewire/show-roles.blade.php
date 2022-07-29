@@ -1,6 +1,6 @@
 <div>
     <div class="d-flex justify-content-end">
-        @livewire('create-rol')
+        <a class="btn btn-success" href="{{ route('admin.roles.create') }}">Nuevo</a>
     </div>
     <div class="card mt-2">
         <div class="card-header">

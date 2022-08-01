@@ -3,7 +3,6 @@
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use Laravel\Jetstream\Rules\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +28,8 @@ Route::middleware([
 
     Route::get('dashboard', function () {
         return view('admin.dashboard');
-    })->name('admin.dashboard');
+    })->name('admin.dashboard')
+        ->can('ver dashboard');
 
     Route::resource('users', UserController::class)
     ->only(['index','create','store','edit','update'])

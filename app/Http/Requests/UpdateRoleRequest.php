@@ -24,7 +24,15 @@ class UpdateRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'permissions' => ['required', 'array'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'permissions.required' => 'Debe seleccionar al menos un permiso',
         ];
     }
 }

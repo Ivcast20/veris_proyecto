@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Users')
+@section('title', 'Editar Usuario')
 
 @section('content_header')
     <div class="d-flex justify-content-center">

@@ -36,9 +36,14 @@ class ShowUsers extends Component
     public function render()
     {
         if($this->tipo == 0) {
-            $users = User::where('name','LIKE','%' . $this->search . '%')->paginate(10);
+            $users = User::where('name','LIKE','%' . $this->search . '%')->
+                        orWhere('lastname', 'LIKE', '%' . $this->search . '%')->paginate(10);
         } else {
-            $users = User::onlyTrashed()->where('name','LIKE','%' . $this->search . '%')->paginate(10);
+            $users = User::onlyTrashed()
+                        ->where([
+                            ['name','LIKE', '%' . $this->search . '%', 'or'],
+                            ['lastname', 'LIKE', '%' . $this->search . '%']])
+                        ->paginate(10);
         }
 
         //$users = User::where('name','LIKE','%' . $this->search . '%')->paginate(10);

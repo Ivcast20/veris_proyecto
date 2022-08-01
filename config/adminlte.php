@@ -248,19 +248,22 @@ return [
             'text' => 'Dashboard',
             'route'  => 'admin.dashboard',
             'icon' => 'fas fa-tachometer-alt',
+            'can' => 'ver dashboard',
         ],
         [
-            'header' => 'Administración'
+            'header' => 'ADMINISTRACIÓN'
         ],
         [
             'text' => 'Usuarios',
             'route'  => 'admin.users.index',
             'icon' => 'fas fa-users',
+            'active' => ['users*'],
         ],
         [
             'text' => 'Roles',
             'route'  => 'admin.roles.index',
             'icon' => 'fas fa-user-tag',
+            'active' => ['roles.*'],
         ],
         // [
         //     'text'        => 'pages',

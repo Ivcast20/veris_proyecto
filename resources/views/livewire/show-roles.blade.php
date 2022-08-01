@@ -24,8 +24,15 @@
                                 <tr>
                                     <td>{{ $rol->id }}</td>
                                     <td>{{ $rol->name }}</td>
-                                    <td>{{ $rol->created_at }}</td>
-                                    <td>{{ $rol->updated_at }}</td>
+                                    <td>{{ $rol->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ $rol->updated_at->format('d-m-Y') }}</td>
+                                    <td>
+                                        <a class="btn btn-primary"
+                                            href="{{ route('admin.roles.edit', $rol->id) }}">Editar</a>
+                                    </td>
+                                    <td><button class="btn btn-danger"
+                                            wire:click="$emit('deleteRol',{{ $rol->id }})">Eliminar</button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -51,3 +58,29 @@
         @endif
     </div>
 </div>
+
+@push('js')
+    <script>
+        Livewire.on('deleteRol', (rolId) => {
+            Swal.fire({
+                title: 'Confirmar eliminación',
+                text: "¿Está seguro de eliminar este rol?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emitTo('show-roles', 'delete', rolId);
+                    Swal.fire(
+                        'Eliminado!',
+                        'El rol ha sido eliminado.',
+                        'success'
+                    )
+                }
+            })
+        })
+    </script>
+@endpush

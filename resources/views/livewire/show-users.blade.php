@@ -4,12 +4,6 @@
     </div>
     <div class="card mt-2">
         <div class="card-header">
-            {{-- <input type="text" class="form-control" wire:model="search" placeholder="Ingrese el nombre a buscar">
-            <select name="" id="" wire:model="tipo">
-                @foreach ($tipos_busqueda as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
-                @endforeach
-            </select> --}}
             <div class="input-group  mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
@@ -47,13 +41,10 @@
                                 <th>{{ __('Nombre') }}</th>
                                 <th>{{ __('Apellido') }}</th>
                                 <th>{{ __('Email') }}</th>
-                                @if ($this->tipo == 0)
-                                    <th>{{ __('Fecha Creación') }}</th>
-                                    <th>{{ __('Fecha Actualización') }}</th>
-                                    <th colspan="2">Acciones</th>
-                                @else
-                                    <th>{{ __('Fecha Eliminado') }}</th>
-                                @endif
+                                <th>{{ __('Fecha Creación') }}</th>
+                                <th>{{ __('Fecha Actualización') }}</th>
+                                <th>{{ __('Estado') }}</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,18 +54,21 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->lastname }}</td>
                                     <td>{{ $user->email }}</td>
-                                    @if ($this->tipo == 0)
-                                        <td>{{ $user->created_at->format('d/m/Y') }}</td>
-                                        <td>{{ $user->updated_at->format('d/m/Y') }}</td>
-                                        <td>
+                                    <td>{{ $user->created_at->format('d/m/Y') }}</td>
+                                    <td>{{ $user->updated_at->format('d/m/Y') }}</td>
+                                    <td>{{ $user->deleted_at ? 'Inactivo' : 'Activo' }}</td>
+                                    @if (!$user->deleted_at)
+                                        <td align="center">
                                             <a class="btn btn-info"
                                                 href="{{ Route('admin.users.edit', $user->id) }}">Editar</a>
-                                        </td>
-                                        <td><button class="btn btn-danger"
+                                            <button class="btn btn-danger"
                                                 wire:click="$emit('deleteUser',{{ $user->id }})">Eliminar</button>
                                         </td>
                                     @else
-                                        <td>{{ $user->deleted_at->format('d/m/Y') }}</td>
+                                        <td align="center">
+                                            <button class="btn btn-warning"
+                                            wire:click="$emit('restoreUser',{{ $user->id }})">Restaurar</button>
+                                        </td>
                                     @endif
                                 </tr>
                             @endforeach
@@ -123,7 +117,29 @@
                         'success'
                     )
                 }
-            })
-        })
+            });
+        });
+
+        Livewire.on('restoreUser', (userId) => {
+            Swal.fire({
+                title: 'Confirmar restaurar',
+                text: "¿Está seguro de restaurar este usuario?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emitTo('show-users', 'restore', userId);
+                    Swal.fire(
+                        'Restaurado!',
+                        'El usuario ha sido restaurado.',
+                        'success'
+                    )
+                }
+            });
+        });
     </script>
 @endpush

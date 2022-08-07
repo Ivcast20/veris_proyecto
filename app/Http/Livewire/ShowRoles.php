@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Role;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Spatie\Permission\Models\Role;
 
 class ShowRoles extends Component
 {
@@ -13,9 +13,9 @@ class ShowRoles extends Component
 
     public $search;
     public $tipo = 0;
-    public $tipos_busqueda = ['Activo', 'Inactivo'];
+    public $tipos_busqueda = ['Todos','Activo', 'Inactivo'];
 
-    protected $listeners = ['delete','render'];
+    protected $listeners = ['delete', 'restore', 'render'];
 
     public function updatingSearch()
     {
@@ -29,10 +29,17 @@ class ShowRoles extends Component
 
     public function render()
     {
-        if($this->tipo == 0){
-            $roles = Role::where('name','LIKE','%' . $this->search . '%')->paginate(10);
-        }else{
-            $roles = Role::onlyTrashed()->where('name','LIKE','%' . $this->search . '%')->paginate(10);
+        switch ($this->tipo)
+        {
+            case 0:
+                $roles = Role::withTrashed()->where('name', 'like', '%'.$this->search.'%')->paginate(10);
+                break;
+            case 1:
+                $roles = Role::where('name', 'like', '%'.$this->search.'%')->where('deleted_at', null)->paginate(10);
+                break;
+            case 2:
+                $roles = Role::onlyTrashed()->where('name', 'like', '%'.$this->search.'%')->whereNotNull('deleted_at')->paginate(10);
+                break;
         }
         return view('livewire.show-roles', compact('roles'));
     }
@@ -40,5 +47,10 @@ class ShowRoles extends Component
     public function delete(Role $role)
     {
         $role->delete();
+    }
+
+    public function restore($rolId)
+    {
+        Role::onlyTrashed()->find($rolId)->restore();
     }
 }

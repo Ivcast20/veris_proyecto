@@ -4,7 +4,24 @@
     </div>
     <div class="card mt-2">
         <div class="card-header">
-            <input type="text" class="form-control" wire:model="search" placeholder="Ingrese el nombre a buscar">
+            <div class="input-group  mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="Username"
+                    aria-describedby="basic-addon1" wire:model="search">
+            </div>
+
+            <div class="input-group ">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Estado</span>
+                </div>
+                <select name="" id="" wire:model="tipo" class="form-control">
+                    @foreach ($this->tipos_busqueda as $llave => $valor)
+                        <option value="{{ $llave }}">{{ $valor }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
         @if ($roles->count())
             <div class="card-body">
@@ -16,23 +33,36 @@
                                 <th>{{ __('Nombre') }}</th>
                                 <th>{{ __('Fecha Creación') }}</th>
                                 <th>{{ __('Fecha Actualización') }}</th>
-                                <th colspan="2">Acciones</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($roles as $rol)
-                                <tr>
+                                <tr class="text-center">
                                     <td>{{ $rol->id }}</td>
                                     <td>{{ $rol->name }}</td>
                                     <td>{{ $rol->created_at->format('d-m-Y') }}</td>
                                     <td>{{ $rol->updated_at->format('d-m-Y') }}</td>
-                                    <td>
+                                    @if (!$rol->deleted_at)
+                                        <td align="center">
+                                            <a class="btn btn-info"
+                                                href="{{ Route('admin.roles.edit', $rol->id) }}">Editar</a>
+                                            <button class="btn btn-danger"
+                                                wire:click="$emit('deleteRol',{{ $rol->id }})">Eliminar</button>
+                                        </td>
+                                    @else
+                                        <td align="center">
+                                            <button class="btn btn-warning"
+                                            wire:click="$emit('restoreRol',{{ $rol->id }})">Restaurar</button>
+                                        </td>
+                                    @endif
+                                    {{-- <td>
+                                        
                                         <a class="btn btn-primary"
                                             href="{{ route('admin.roles.edit', $rol->id) }}">Editar</a>
-                                    </td>
-                                    <td><button class="btn btn-danger"
+                                        <button class="btn btn-danger"
                                             wire:click="$emit('deleteRol',{{ $rol->id }})">Eliminar</button>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
@@ -80,7 +110,29 @@
                         'success'
                     )
                 }
-            })
-        })
+            });
+        });
+
+        Livewire.on('restoreRol', (rolId) => {
+            Swal.fire({
+                title: 'Confirmar restaurar',
+                text: "¿Está seguro de restaurar este rol?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emitTo('show-roles', 'restore', rolId);
+                    Swal.fire(
+                        'Restaurado!',
+                        'El rol ha sido restaurado.',
+                        'success'
+                    )
+                }
+            });
+        });
     </script>
 @endpush

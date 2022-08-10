@@ -265,6 +265,14 @@ return [
             'icon' => 'fas fa-user-tag',
             'active' => ['roles.*'],
         ],
+        [
+            'header' => 'CONFIGURACIÓN'
+        ],
+        [
+            'text' => 'Niveles de Calificación',
+            'route'  => 'admin.niveles.index',
+            'icon' => 'fas fa-star',
+        ]
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',

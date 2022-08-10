@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('criterio_impactos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
+        Schema::create('criterio_impacto_nivel', function (Blueprint $table) {
+            $table->foreignId('criterio_impacto_id')->constrained('criterio_impactos');
+            $table->foreignId('nivel_id')->constrained('niveles');
+            $table->primary(['criterio_impacto_id', 'nivel_id']);
+            $table->text('descripcion');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('criterio_impactos');
+        Schema::dropIfExists('criterio_impacto_nivel');
     }
 };

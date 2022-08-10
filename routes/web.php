@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\NivelController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\CriterioImpacto;
+use App\Models\Nivel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +41,10 @@ Route::middleware([
     Route::resource('roles', RoleController::class)
     ->only(['index','create','store','edit','update'])
     ->names('admin.roles');
+
+    Route::resource('niveles', NivelController::class)
+    ->only(['index','create','store','edit','update'])
+    ->names('admin.niveles');
     
 });
 
@@ -47,4 +54,9 @@ Route::middleware(['auth:sactum',
     ])->group(function () {
     //Rutas para exportar usuarios en excel y pdf
     Route::get('excel/users', [UserController::class,'exportExcel'])->name('excel.users');
+});
+
+Route::get('prueba', function () {
+    return CriterioImpacto::with('niveles')->get();
+
 });

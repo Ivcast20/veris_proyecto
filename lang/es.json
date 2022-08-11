@@ -186,5 +186,12 @@
     "You may not delete your personal team.": "No se puede borrar su equipo personal.",
     "You may not leave a team that you created.": "No se puede abandonar un equipo que usted creó.",
     "Your email address is unverified.": "Su dirección de correo electrónico no está verificada.",
-    "Last Name": "Apellido"
+    "Last Name": "Apellido",
+    "name": "Nombre",
+    "value": "Valor",
+    "created_at": "Fecha de creación",
+    "updated_at": "Fecha de actualización",
+    "deleted_at": "Fecha de eliminación",
+    "state": "Estado",
+    "actions": "Acciones"
 }

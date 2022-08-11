@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'Director123-'])->assignRole('director');
 
         User::factory(100)->create();
-        $this->call(NivelSeeder::class);
-        $this->call(CriterioImpactoSeeder::class);
+
+        $this->call(LevelSeeder::class);
     }
 }

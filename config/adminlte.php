@@ -15,7 +15,7 @@ return [
     */
 
     'title' => '',
-    'title_prefix' => 'VerisSGNC |',
+    'title_prefix' => 'VerisSGCN |',
     'title_postfix' => '',
 
     /*
@@ -270,9 +270,15 @@ return [
         ],
         [
             'text' => 'Niveles de Calificación',
-            'route'  => 'admin.niveles.index',
+            'route'  => 'admin.levels.index',
             'icon' => 'fas fa-star',
-        ]
+            'active' => ['levels*'],
+        ],
+        // [
+        //     'text' => 'Criterios de Impacto',
+        //     'url'  => '#',
+        //     'icon' => 'fas fa-question',
+        // ]
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',

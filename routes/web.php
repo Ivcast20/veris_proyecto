@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\NivelController;
+use App\Http\Controllers\LevelController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\CriterioImpacto;
-use App\Models\Nivel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,9 +41,9 @@ Route::middleware([
     ->only(['index','create','store','edit','update'])
     ->names('admin.roles');
 
-    Route::resource('niveles', NivelController::class)
+    Route::resource('levels', LevelController::class)
     ->only(['index','create','store','edit','update'])
-    ->names('admin.niveles');
+    ->names('admin.levels');
     
 });
 

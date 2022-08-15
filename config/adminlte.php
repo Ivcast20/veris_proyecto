@@ -251,6 +251,14 @@ return [
             'can' => 'ver dashboard',
         ],
         [
+            'header' => 'BIA (Análisis de impacto al negocio)'
+        ],
+        [
+            'text' => 'Lista de Auditorías',
+            'url'  => '#',
+            'icon' => 'fas fa-list',
+        ],
+        [
             'header' => 'ADMINISTRACIÓN'
         ],
         [
@@ -274,6 +282,11 @@ return [
             'icon' => 'fas fa-star',
             'active' => ['levels*'],
         ],
+        [
+            'text' => 'Criterios de Impacto',
+            'route'  => 'admin.criteria.index',
+            'icon' => 'fas fa-star',
+        ]
         // [
         //     'text' => 'Criterios de Impacto',
         //     'url'  => '#',

@@ -56,6 +56,6 @@ Route::middleware(['auth:sactum',
 });
 
 Route::get('prueba', function () {
-    return CriterioImpacto::with('niveles')->get();
+    return config('app.url');
 
 });

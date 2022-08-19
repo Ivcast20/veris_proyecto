@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateLevelRequest extends FormRequest
+class StoreBiaProcessRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class UpdateLevelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'value' => 'required|integer|min:1|unique:levels,value,' . $this->level->id,
-            'active' => 'required|boolean',
+            'nombre' => 'required|string|max:255|unique:bia_processes',
+            'alcance' => 'required|string|max:600',
+            'fecha_inicio' => 'required|date|after:yesterday',
+            'fecha_fin' => 'required|date|after:fecha_inicio',
         ];
     }
 }

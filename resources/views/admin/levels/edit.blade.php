@@ -25,6 +25,13 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
+            <div class="form-group">
+                {!! Form::label('active', 'Estado') !!}
+                {!! Form::select('active', [1 => 'Activo', 0 => 'Inactivo'], $level->active, ['class' => 'form-control']) !!}
+                @error('active')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
             <div class="pt-2">
                 <div class="d-flex justify-content-center">
                     <a href="{{ route('admin.levels.index') }}" class="btn btn-secondary mr-2">Cancelar</a>

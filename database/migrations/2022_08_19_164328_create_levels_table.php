@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('audit_processes', function (Blueprint $table) {
+        Schema::create('levels', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->integer('valor');
+            $table->foreignId('bia_process_id')->constrained('bia_processes')->onDelete('cascade');
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('audit_processes');
+        Schema::dropIfExists('levels');
     }
 };

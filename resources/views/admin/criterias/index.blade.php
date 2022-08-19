@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+{{-- @extends('adminlte::page')
 
 @section('title', 'Criterios de Impacto')
 
@@ -8,6 +8,7 @@
 
 @section('content')
     <h1>Hola</h1>
+    <img src="{{ asset('imgs.LOGO_VERIS.png') }}" class="img-fluid rounded-top" alt="">
 @stop
 
 @section('css')
@@ -27,4 +28,16 @@
         });
     }
 </script>
-@stop
+@stop --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <img src="imgs/LOGO_VERIS.png" class="img-fluid rounded-top" alt="">
+</body>
+</html>

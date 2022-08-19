@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('levels', function (Blueprint $table) {
+        Schema::create('bia_processes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('value');
-            $table->softDeletes();
+            $table->string('nombre');
+            $table->text('alcance');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('levels');
+        Schema::dropIfExists('bia_processes');
     }
 };

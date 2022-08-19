@@ -254,7 +254,7 @@ return [
             'header' => 'BIA (Análisis de impacto al negocio)'
         ],
         [
-            'text' => 'Lista de Auditorías',
+            'text' => 'Lista de BIA',
             'url'  => '#',
             'icon' => 'fas fa-list',
         ],
@@ -277,16 +277,28 @@ return [
             'header' => 'CONFIGURACIÓN'
         ],
         [
+            'text' => 'BIA parametros',
+            'route'  => 'admin.biaprocesses.index',
+            'icon' => 'fas fa-cogs',
+        ],
+        [
             'text' => 'Niveles de Calificación',
+            //'url'  => '#',
             'route'  => 'admin.levels.index',
             'icon' => 'fas fa-star',
             'active' => ['levels*'],
         ],
         [
-            'text' => 'Criterios de Impacto',
-            'route'  => 'admin.criteria.index',
-            'icon' => 'fas fa-star',
-        ]
+            'text' => 'Parámetros',
+            'url'  => '#',
+            'icon' => 'fas fa-cogs',
+        ],
+        
+        // [
+        //     'text' => 'Criterios de Impacto',
+        //     'route'  => 'admin.criteria.index',
+        //     'icon' => 'fas fa-star',
+        // ]
         // [
         //     'text' => 'Criterios de Impacto',
         //     'url'  => '#',

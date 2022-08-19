@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\BiaProcessController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Models\CriterioImpacto;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,9 +41,15 @@ Route::middleware([
     ->only(['index','create','store','edit','update'])
     ->names('admin.roles');
 
+    Route::resource('bia_processes', BiaProcessController::class)
+    ->only(['index','create','store','edit','update'])
+    ->names('admin.biaprocesses');
+
     Route::resource('levels', LevelController::class)
     ->only(['index','create','store','edit','update'])
     ->names('admin.levels');
+    
+
     
 });
 
@@ -55,7 +61,8 @@ Route::middleware(['auth:sactum',
     Route::get('excel/users', [UserController::class,'exportExcel'])->name('excel.users');
 });
 
+
 Route::get('prueba', function () {
-    return config('app.url');
+    return view('emails.new_user_mail');
 
 });

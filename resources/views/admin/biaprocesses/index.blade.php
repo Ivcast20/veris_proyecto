@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Niveles')
+@section('title', 'BIA Processes')
 
 @section('content_header')
-    <h1 class="text-center">Lista de Niveles</h1>
+    <h1 class="text-center">Lista de BIA</h1>
 @stop
 
 @section('content')
-    @livewire('levels.show-levels')
+    @livewire('show-bia-processes')
 @stop
 
 @section('css')

@@ -4,14 +4,14 @@
     </div>
     <div class="card mt-2">
         <div class="card-header">
-            {{-- <div class="input-group  mb-3">
+             <div class="input-group  mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
                 </div>
                 <input type="text" class="form-control" placeholder="Buscar" aria-label="Username"
                     aria-describedby="basic-addon1" wire:model="search">
             </div>
-
+            {{--
             <div class="input-group ">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Estado</span>
@@ -56,7 +56,7 @@
                         </tbody>
                     </table>
                 </div>
-                <b>Total: </b>
+                <b>Total: </b>{{ $biaProcesses->count() }}
                 <div class="pt-2">
                     
                 </div>

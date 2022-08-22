@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreLevelRequest extends FormRequest
 {
@@ -24,8 +25,20 @@ class StoreLevelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:levels,name',
-            'value' => 'required|integer|min:1|unique:levels,value',
+            'nombre' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('levels')->where('bia_process_id', $this->bia_process_id)
+            ],
+            'valor' => [
+                'required',
+                'integer',
+                'min:1',
+                Rule::unique('levels')->where('bia_process_id', $this->bia_process_id)
+            ],
+            'bia_process_id' => 'required|integer',
         ];
     }
+
 }

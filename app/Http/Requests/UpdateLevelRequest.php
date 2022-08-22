@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use phpDocumentor\Reflection\Types\This;
 
 class UpdateLevelRequest extends FormRequest
 {
@@ -24,9 +26,23 @@ class UpdateLevelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'value' => 'required|integer|min:1|unique:levels,value,' . $this->level->id,
-            'active' => 'required|boolean',
+            'nombre' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('levels')
+                ->ignore($this->level->id)
+                ->where('bia_process_id', $this->bia_process_id)
+            ],
+            'valor' => [
+                'required',
+                'integer',
+                'min:1',
+                Rule::unique('levels')
+                ->ignore($this->level->id)
+                ->where('bia_process_id', $this->bia_process_id)
+            ],
+            'estado' => 'boolean',
         ];
     }
 }

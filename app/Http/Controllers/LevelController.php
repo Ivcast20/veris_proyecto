@@ -24,9 +24,9 @@ class LevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($bia_id)
     {
-        return view('admin.levels.create');
+        return view('admin.levels.create', compact('bia_id'));
     }
 
     /**
@@ -37,8 +37,8 @@ class LevelController extends Controller
      */
     public function store(StoreLevelRequest $request)
     {
-        // Level::create($request->validated());
-        // return redirect()->route('admin.levels.index')->with('message', 'Nivel creado correctamente');
+        Level::create($request->validated());
+        return redirect()->route('admin.levels.index')->with('message', 'Nivel creado correctamente');
     }
 
     /**
@@ -47,10 +47,10 @@ class LevelController extends Controller
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    // public function edit(Level $level)
-    // {
-    //     return view('admin.levels.edit', compact('level'));
-    // }
+    public function edit(Level $level)
+    {
+        return view('admin.levels.edit', compact('level'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -59,9 +59,10 @@ class LevelController extends Controller
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    // public function update(UpdateLevelRequest $request, Level $level)
-    // {
-    //     $level->update($request->validated());
-    //     return redirect()->route('admin.levels.index')->with('message', 'Nivel actualizado correctamente');
-    // }
+    public function update(UpdateLevelRequest $request, Level $level)
+    {
+        //return $level;
+        $level->update($request->validated());
+        return redirect()->route('admin.levels.index')->with('message', 'Nivel actualizado correctamente');
+    }
 }

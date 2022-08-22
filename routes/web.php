@@ -1,22 +1,11 @@
 <?php
 
 use App\Http\Controllers\BiaProcessController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 
 
 Route::middleware([
@@ -45,11 +34,23 @@ Route::middleware([
     ->only(['index','create','store','edit','update'])
     ->names('admin.biaprocesses');
 
-    Route::resource('levels', LevelController::class)
+    Route::resource('categories', CategoryController::class)
     ->only(['index','create','store','edit','update'])
-    ->names('admin.levels');
-    
+    ->names('admin.categories');
 
+
+    //Rutas para los niveles
+    Route::get('levels', [LevelController::class, 'index'])
+    ->name('admin.levels.index');
+    Route::get('levels/{bia_id}/create', [LevelController::class, 'create'])
+    ->name('admin.levels.create');
+    Route::post('levels', [LevelController::class,'store'])
+    ->name('admin.levels.store');
+    Route::get('levels/{level}/edit', [LevelController::class,'edit'])
+    ->name('admin.levels.edit');
+    Route::put('levels/{level}', [LevelController::class,'update'])
+    ->name('admin.levels.update');
+    
     
 });
 
@@ -64,5 +65,4 @@ Route::middleware(['auth:sactum',
 
 Route::get('prueba', function () {
     return view('emails.new_user_mail');
-
 });

@@ -277,9 +277,14 @@ return [
             'header' => 'CONFIGURACIÓN'
         ],
         [
-            'text' => 'BIA parametros',
+            'text' => 'BIA configuración',
             'route'  => 'admin.biaprocesses.index',
             'icon' => 'fas fa-cogs',
+        ],
+        [
+            'text' => 'Categorías de Productos',
+            'route'  => 'admin.categories.index',
+            'icon' => 'fas fa-cubes',
         ],
         [
             'text' => 'Niveles de Calificación',

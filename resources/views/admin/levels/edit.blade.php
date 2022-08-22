@@ -12,26 +12,27 @@
         <div class="card-body">
             {!! Form::model($level, ['route' => ['admin.levels.update', $level], 'method' => 'put']) !!}
             <div class="form-group">
-                {!! Form::label('name', 'Nombre') !!}
-                {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                @error('name')
+                {!! Form::label('nombre', 'Nombre') !!}
+                {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+                @error('nombre')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-group">
-                {!! Form::label('value', 'Valor') !!}
-                {!! Form::number('value', null, ['class' => 'form-control']) !!}
-                @error('value')
+                {!! Form::label('valor', 'Valor') !!}
+                {!! Form::number('valor', null, ['class' => 'form-control']) !!}
+                @error('valor')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
             <div class="form-group">
-                {!! Form::label('active', 'Estado') !!}
-                {!! Form::select('active', [1 => 'Activo', 0 => 'Inactivo'], $level->active, ['class' => 'form-control']) !!}
+                {!! Form::label('estado', 'Estado') !!}
+                {!! Form::select('estado', [1 => 'Activo', 0 => 'Inactivo'], $level->active, ['class' => 'form-control']) !!}
                 @error('active')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
+            <input type="hidden" name="bia_process_id" value="{{ $level->bia_process_id }}">
             <div class="pt-2">
                 <div class="d-flex justify-content-center">
                     <a href="{{ route('admin.levels.index') }}" class="btn btn-secondary mr-2">Cancelar</a>

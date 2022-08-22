@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -37,6 +38,8 @@ class DatabaseSeeder extends Seeder
             'password' => 'Director123-'])->assignRole('director');
 
         User::factory(100)->create();
-        //$this->call(BiaSeeder::class);
+        $this->call(BiaSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(LevelSeeder::class);
     }
 }

@@ -14,6 +14,7 @@
                     @endforeach
                 </select>
             </div>
+            {{ $procesoBia }}
         </div>
         @if ($levels->count())
             <div class="card-body">

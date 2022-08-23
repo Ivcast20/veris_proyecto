@@ -21,6 +21,13 @@ class ShowLevels extends Component
         $this->resetPage();
     }
 
+    public function updatingProcesoBia()
+    {
+        $this->resetPage();
+    }
+
+    protected $listeners = ['render'];
+
     public function mount()
     {
         $this->procesoBia = BiaProcess::where('estado',1)->orderBy('id','desc')->first()->id;
@@ -28,7 +35,11 @@ class ShowLevels extends Component
     public function render()
     {
         $procesosBia = BiaProcess::where('estado',1)->orderBy('id','desc')->get();
-        $levels = Level::where('nombre','LIKE','%' . $this->search . '%')->paginate(5);
+        $levels = Level::where(
+            [
+                ['nombre','LIKE','%' . $this->search . '%'],
+                ['bia_process_id',$this->procesoBia]
+            ])->paginate(5);
         return view('livewire.levels.show-levels', compact('procesosBia','levels'));
     }
 }

@@ -14,12 +14,6 @@ class ShowLevels extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $procesoBia;
-    public $search;
-
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
 
     public function updatingProcesoBia()
     {
@@ -37,7 +31,6 @@ class ShowLevels extends Component
         $procesosBia = BiaProcess::where('estado',1)->orderBy('id','desc')->get();
         $levels = Level::where(
             [
-                ['nombre','LIKE','%' . $this->search . '%'],
                 ['bia_process_id',$this->procesoBia]
             ])->paginate(5);
         return view('livewire.levels.show-levels', compact('procesosBia','levels'));

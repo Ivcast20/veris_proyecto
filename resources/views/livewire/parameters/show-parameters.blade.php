@@ -1,7 +1,7 @@
 <div>
     <div>
         <div class="d-flex justify-content-end">
-            <a class="btn btn-success" href="#">Nuevo</a>
+            <a class="btn btn-success" href="{{ route('admin.parameters.create') }}">Nuevo</a>
         </div>
         <div class="card mt-2">
             <div class="card-header">
@@ -50,7 +50,7 @@
                                         <td>{{ $parametro->estado == 0 ? 'Inactivo' : 'Activo' }}</td>
                                         <td>
                                             <a class="btn btn-info"
-                                                href="#">Editar</a>
+                                                href="{{ route('admin.parameters.edit',$parametro->id) }}">Editar</a>
                                         </td>
                                     </tr>
                                 @endforeach

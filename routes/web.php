@@ -4,6 +4,7 @@ use App\Http\Controllers\BiaProcessController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ParameterController;
+use App\Http\Controllers\ProductServiceController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -53,18 +54,22 @@ Route::middleware([
     ->name('admin.levels.update');
 
     Route::resource('parameters',ParameterController::class)
+    ->only(['index','create','store','edit','update'])
     ->names('admin.parameters');
     
+    Route::resource('product_service',ProductServiceController::class)
+    ->only(['index','create','store','edit','update'])
+    ->names('admin.products');
     
 });
 
-Route::middleware(['auth:sactum',
-    config('jetstream.auth_session'),
-    'verfied'
-    ])->group(function () {
-    //Rutas para exportar usuarios en excel y pdf
-    Route::get('excel/users', [UserController::class,'exportExcel'])->name('excel.users');
-});
+// Route::middleware(['auth:sactum',
+//     config('jetstream.auth_session'),
+//     'verfied'
+//     ])->group(function () {
+//     //Rutas para exportar usuarios en excel y pdf
+//     Route::get('excel/users', [UserController::class,'exportExcel'])->name('excel.users');
+// });
 
 
 Route::get('prueba', function () {

@@ -30,4 +30,11 @@ class StoreBiaProcessRequest extends FormRequest
             'fecha_fin' => 'required|date|after:fecha_inicio',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'fecha_inicio.after' => 'La fecha de inicio debe ser igual o posterior al día de hoy'
+        ];
+    }
 }

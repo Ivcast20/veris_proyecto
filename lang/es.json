@@ -193,5 +193,6 @@
     "updated_at": "Fecha de actualización",
     "deleted_at": "Fecha de eliminación",
     "state": "Estado",
-    "actions": "Acciones"
+    "actions": "Acciones",
+    "yesterday": "Ayer"
 }

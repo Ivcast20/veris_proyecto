@@ -271,7 +271,7 @@ return [
             'text' => 'Roles',
             'route'  => 'admin.roles.index',
             'icon' => 'fas fa-user-tag',
-            'active' => ['roles.*'],
+            'active' => ['roles*'],
         ],
         [
             'header' => 'CONFIGURACIÓN'
@@ -280,6 +280,7 @@ return [
             'text' => 'BIA configuración',
             'route'  => 'admin.biaprocesses.index',
             'icon' => 'fas fa-cogs',
+            'active' => ['bia_processes*']
         ],
         [
             'text' => 'Categorías de Productos',
@@ -292,11 +293,19 @@ return [
             'route'  => 'admin.levels.index',
             'icon' => 'fas fa-star',
             'active' => ['levels*'],
+            'icon_color' => 'yellow'
         ],
         [
             'text' => 'Parámetros',
             'route'  => 'admin.parameters.index',
             'icon' => 'fas fa-cogs',
+            'active' => ['parameters*']
+        ],
+        [
+            'text' => 'Productos y Servicios',
+            'route' => 'admin.products.index',
+            'icon' => 'fas fa-clipboard',
+            'icon_color' => 'red',
         ],
         
         // [

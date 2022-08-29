@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreParameterRequest;
+use App\Http\Requests\UpdateParameterRequest;
+use App\Models\BiaProcess;
 use App\Models\Parameter;
 use Illuminate\Http\Request;
 
@@ -24,7 +27,8 @@ class ParameterController extends Controller
      */
     public function create()
     {
-        //
+        $procesos_bia = BiaProcess::where('estado',1)->orderBy('id','desc')->get();
+        return view('admin.parameters.create', compact('procesos_bia'));
     }
 
     /**
@@ -33,20 +37,10 @@ class ParameterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreParameterRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Parameter  $parameter
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Parameter $parameter)
-    {
-        //
+        Parameter::create($request->validated());
+        return redirect()->route('admin.parameters.index')->with(['message' => 'Parámetro agregado exitosamente']);
     }
 
     /**
@@ -57,29 +51,18 @@ class ParameterController extends Controller
      */
     public function edit(Parameter $parameter)
     {
-        //
+        // $procesos_bia = BiaProcess::where('estado',1)->latest()->get();
+        $bia_process = BiaProcess::find($parameter->bia_process_id);
+        // return view('admin.parameters.edit', compact('parameter','procesos_bia'));
+        return view('admin.parameters.edit', compact('parameter','bia_process'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Parameter  $parameter
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Parameter $parameter)
+    
+    public function update(UpdateParameterRequest $request, Parameter $parameter)
     {
-        //
+        $parameter->update($request->validated());
+        return redirect()->route('admin.parameters.index')->with('message','Parámetro actualizado exitosamente');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Parameter  $parameter
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Parameter $parameter)
-    {
-        //
-    }
 }

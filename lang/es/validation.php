@@ -134,5 +134,6 @@ return [
         'phone' => 'teléfono',
         'mobile' => 'móvil',
         'value' => 'valor',
+        'yesterday' => 'el día de ayer'
     ],
 ];

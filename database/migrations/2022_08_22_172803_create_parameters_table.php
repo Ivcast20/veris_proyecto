@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('parameters', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->boolean('estado');
+            $table->foreignId('bia_process_id')->constrained('bia_processes')->onDelete('cascade');
             $table->timestamps();
         });
     }

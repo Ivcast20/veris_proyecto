@@ -295,7 +295,7 @@ return [
         ],
         [
             'text' => 'Parámetros',
-            'url'  => '#',
+            'route'  => 'admin.parameters.index',
             'icon' => 'fas fa-cogs',
         ],
         

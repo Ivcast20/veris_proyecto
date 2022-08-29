@@ -3,6 +3,7 @@
 use App\Http\Controllers\BiaProcessController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ParameterController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,9 @@ Route::middleware([
     ->name('admin.levels.edit');
     Route::put('levels/{level}', [LevelController::class,'update'])
     ->name('admin.levels.update');
+
+    Route::resource('parameters',ParameterController::class)
+    ->names('admin.parameters');
     
     
 });

@@ -1,10 +1,10 @@
 <div>
     <div class="d-flex justify-content-end">
-        <a class="btn btn-success" href="#">Nuevo</a>
+        <a class="btn btn-success" href="{{ route('admin.products.create') }}">Nuevo</a>
     </div>
     <div class="card mt-2">
         <div class="card-header">
-            {{-- <div class="input-group mb-3">
+            <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">BIA</span>
                 </div>
@@ -23,7 +23,7 @@
                         <option value="{{ $llave }}">{{ $valor }}</option>
                     @endforeach
                 </select>
-            </div> --}}
+            </div>
         </div>
         @if ($productos->count())
             <div class="card-body">
@@ -48,8 +48,7 @@
                                     <td>{{ $producto->updated_at->format('d/m/Y') }}</td>
                                     <td>{{ $producto->estado == 0 ? 'Inactivo' : 'Activo' }}</td>
                                     <td>
-                                        <a class="btn btn-info"
-                                            href="#">Editar</a>
+                                        <a class="btn btn-info" href="#">Editar</a>
                                     </td>
                                 </tr>
                             @endforeach

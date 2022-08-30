@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BiaProcess;
+use App\Models\Category;
 use App\Models\ProductService;
 use Illuminate\Http\Request;
 
@@ -24,7 +26,9 @@ class ProductServiceController extends Controller
      */
     public function create()
     {
-        //
+        $procesos_bia = BiaProcess::where('estado',1)->orderBy('id','desc')->get();
+        $categories = Category::where('estado',1)->get();
+        return view('admin.products.create', compact('procesos_bia','categories'));
     }
 
     /**
@@ -35,7 +39,8 @@ class ProductServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ProductService::create($request->all());
+        return redirect()->route('admin.products.index')->with(['message' => 'Se guardó el producto exitosamente']);
     }
 
     /**

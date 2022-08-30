@@ -134,6 +134,8 @@ return [
         'phone' => 'teléfono',
         'mobile' => 'móvil',
         'value' => 'valor',
-        'yesterday' => 'el día de ayer'
+        'yesterday' => 'el día de ayer',
+        'bia_process_id' => 'proceso BIA',
+        'category_id' => 'categoría'
     ],
 ];

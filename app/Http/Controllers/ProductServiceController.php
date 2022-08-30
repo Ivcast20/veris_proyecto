@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\BiaProcess;
 use App\Models\Category;
 use App\Models\ProductService;
-use Illuminate\Http\Request;
 
 class ProductServiceController extends Controller
 {
@@ -37,22 +38,12 @@ class ProductServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        ProductService::create($request->all());
+        ProductService::create($request->validated());
         return redirect()->route('admin.products.index')->with(['message' => 'Se guardó el producto exitosamente']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ProductService  $productService
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ProductService $productService)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -62,7 +53,8 @@ class ProductServiceController extends Controller
      */
     public function edit(ProductService $productService)
     {
-        //
+        $categories = Category::where('estado',1)->pluck('nombre','id');
+        return view('admin.products.edit',compact(['productService','categories']));
     }
 
     /**
@@ -72,19 +64,10 @@ class ProductServiceController extends Controller
      * @param  \App\Models\ProductService  $productService
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductService $productService)
+    public function update(UpdateProductRequest $request, ProductService $productService)
     {
-        //
+        $productService->update($request->validated());
+        return redirect()->route('admin.products.index')->with(['message' => 'Producto actualizado exitosamente']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ProductService  $productService
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ProductService $productService)
-    {
-        //
-    }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\ParameterController;
 use App\Http\Controllers\ProductServiceController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 
@@ -74,4 +75,16 @@ Route::middleware([
 
 Route::get('prueba', function () {
     return view('emails.new_user_mail');
+});
+
+Route::get('prueba2', function () {
+    $categorias = Category::withCount(['products' => fn($query) => $query->where('bia_process_id',1)])->get();
+    $json_resp = [];
+    foreach ($categorias as $categ)
+    {
+        $json_resp[$categ->id] = [
+            
+        ];
+    }
+    return $json_resp;
 });

@@ -43,8 +43,22 @@ class ShowProducts extends Component
         switch ($this->estado)
         {
             case 0:
-                $productos = ProductService::where()->paginate(5);
-
+                $productos = ProductService::with('category:id,nombre')->where('bia_process_id',$this->procesoBia)->paginate(5);
+            break;
+            case 1:
+                $productos = ProductService::with('category:id,nombre')->
+                where([
+                    ['bia_process_id',$this->procesoBia],
+                    ['estado',1]
+                    ])->paginate(5);
+            break;
+            case 2:
+                $productos = ProductService::with('category:id,nombre')->
+                where([
+                    ['bia_process_id',$this->procesoBia],
+                    ['estado',0]
+                    ])->paginate(5);
+            break;
         }
         
         return view('livewire.products.show-products', compact('productos'));

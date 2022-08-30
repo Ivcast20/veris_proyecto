@@ -12,4 +12,9 @@ class ProductService extends Model
     protected $fillable = ['nombre','estado','category_id','bia_process_id'];
 
     protected $casts = ['estado' => 'boolean'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'category_id','id');
+    }
 }

@@ -33,6 +33,7 @@
                             <tr class="text-center">
                                 <th>{{ __('ID') }}</th>
                                 <th>{{ __('Nombre') }}</th>
+                                <th>{{ __('Categoría') }}</th>
                                 <th>{{ __('Fecha de Creación') }}</th>
                                 <th>{{ __('Fecha de Actualización') }}</th>
                                 <th>{{ __('Estado') }}</th>
@@ -44,11 +45,12 @@
                                 <tr class="text-center">
                                     <td>{{ $producto->id }}</td>
                                     <td>{{ $producto->nombre }}</td>
+                                    <td>{{ $producto->category->nombre }}</td>
                                     <td>{{ $producto->created_at->format('d/m/Y') }}</td>
                                     <td>{{ $producto->updated_at->format('d/m/Y') }}</td>
                                     <td>{{ $producto->estado == 0 ? 'Inactivo' : 'Activo' }}</td>
                                     <td>
-                                        <a class="btn btn-info" href="#">Editar</a>
+                                        <a class="btn btn-info" href="{{ route('admin.products.edit',$producto->id) }}">Editar</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -9,7 +9,7 @@
                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
                 </div>
                 <input type="text" class="form-control" placeholder="Buscar" aria-label="Username"
-                    aria-describedby="basic-addon1" wire:model="search">
+                    aria-describedby="basic-addon1" wire:model.debounce.500ms="search">
             </div>
 
             <div class="input-group ">

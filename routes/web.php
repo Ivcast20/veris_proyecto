@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BiaProcessController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ParameterController;
 use App\Http\Controllers\ProductServiceController;
@@ -58,9 +59,13 @@ Route::middleware([
     ->only(['index','create','store','edit','update'])
     ->names('admin.parameters');
     
-    Route::resource('product_service',ProductServiceController::class)
+    Route::resource('product_services',ProductServiceController::class)
     ->only(['index','create','store','edit','update'])
     ->names('admin.products');
+
+    Route::resource('criterios', CriteriaController::class)
+    ->only(['index','create','store','edit','update'])
+    ->names('admin.criterias');
     
 });
 

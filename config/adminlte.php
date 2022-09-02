@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\map;
+
 return [
 
     /*
@@ -300,6 +302,11 @@ return [
             'route'  => 'admin.parameters.index',
             'icon' => 'fas fa-cogs',
             'active' => ['parameters*']
+        ],
+        [
+            'text' => 'Criterios de Impacto',
+            'route' => 'admin.criterias.index',
+            'icon_color' => 'green'
         ],
         [
             'text' => 'Productos y Servicios',

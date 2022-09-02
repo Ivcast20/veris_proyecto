@@ -14,7 +14,7 @@ class CriteriaController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.criterias.index');
     }
 
     /**

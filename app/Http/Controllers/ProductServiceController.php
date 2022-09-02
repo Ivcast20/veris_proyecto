@@ -54,7 +54,7 @@ class ProductServiceController extends Controller
     public function edit(ProductService $productService)
     {
         $categories = Category::where('estado',1)->pluck('nombre','id');
-        return view('admin.products.edit',compact(['productService','categories']));
+        return view('admin.products.edit',compact('productService','categories'));
     }
 
     /**

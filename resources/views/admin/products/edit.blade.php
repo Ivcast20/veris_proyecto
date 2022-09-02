@@ -9,7 +9,6 @@
         <li class="breadcrumb-item active" aria-current="page">Editar Producto/Servicio</li>
     </ol>
     <div class="card">
-        {{ $productService }}
         <div class="card-body">
             {!! Form::model($productService, ['route' => ['admin.products.update', $productService], 'method' => 'PUT']) !!}
             <div class="form-group">

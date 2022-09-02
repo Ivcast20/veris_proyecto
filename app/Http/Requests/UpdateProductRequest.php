@@ -30,8 +30,8 @@ class UpdateProductRequest extends FormRequest
                 'string',
                 'max:255',
                 Rule::unique('product_services')
-                ->ignore($this->productService->id)
-                ->where('bia_process_id', $this->bia_process_id)
+                ->ignore($this->product_service->id)
+                ->where('bia_process_id', $this->product_service->bia_process_id)
             ],
             'category_id' => [
                 'required',

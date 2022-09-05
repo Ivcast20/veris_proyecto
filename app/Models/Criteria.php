@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Criteria extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['level_id','parameter_id','bia_process_id','criterio'];
 }

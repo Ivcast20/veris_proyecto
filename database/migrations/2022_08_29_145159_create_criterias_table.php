@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
-            $table->text('criterio');
             $table->foreignId('level_id')->constrained('levels');
             $table->foreignId('parameter_id')->constrained('parameters');
-            $table->foreignId('bia_process_id')->constrained('bia_processes');
-            $table->boolean('estado')->default(true);
+            $table->text('criterio');
+            $table->unique(['level_id','parameter_id'],'level_parameter_unique');
             $table->timestamps();
         });
     }

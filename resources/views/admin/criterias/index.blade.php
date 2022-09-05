@@ -7,8 +7,7 @@
 @stop
 
 @section('content')
-    <h1>Hola</h1>
-    
+    @livewire('criterias.show-criterias')
 @stop
 
 @section('css')

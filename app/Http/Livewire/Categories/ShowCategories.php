@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Categories;
 use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
-use phpDocumentor\Reflection\Types\This;
 
 class ShowCategories extends Component
 {

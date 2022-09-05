@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Criteria;
+use App\Models\Level;
 use Illuminate\Http\Request;
 
 class CriteriaController extends Controller
@@ -14,6 +15,8 @@ class CriteriaController extends Controller
      */
     public function index()
     {
+        // $levels = Level::with('parameters')->get();
+        // return json_encode($levels);
         return view('admin.criterias.index');
     }
 
@@ -24,7 +27,7 @@ class CriteriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.criterias.create');
     }
 
     /**
@@ -34,17 +37,6 @@ class CriteriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Criteria  $criteria
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Criteria $criteria)
     {
         //
     }
@@ -72,14 +64,4 @@ class CriteriaController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Criteria  $criteria
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Criteria $criteria)
-    {
-        //
-    }
 }

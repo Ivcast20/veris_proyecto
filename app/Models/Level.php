@@ -11,4 +11,9 @@ class Level extends Model
 
     protected $fillable = ['nombre','valor','bia_process_id','estado'];
     protected $casts = ['estado' => 'boolean'];
+
+    public function parameters()
+    {
+        return $this->belongsToMany(Parameter::class, 'criterias', 'level_id', 'parameter_id')->withPivot('id','criterio');;
+    }
 }

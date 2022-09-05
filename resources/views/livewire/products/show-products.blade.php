@@ -67,7 +67,7 @@
                 <div class="d-flex justify-content-center">
                     <i class="fa fa-search fa-4x py-2"></i>
                     <div class="align-self-center">
-                        No hay Parámetros registrados
+                        No hay Productos registrados para este BIA con ese estado
                     </div>
                 </div>
             </div>

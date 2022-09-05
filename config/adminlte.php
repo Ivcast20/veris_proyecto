@@ -257,7 +257,7 @@ return [
         ],
         [
             'text' => 'Lista de BIA',
-            'url'  => '#',
+            'url'  => 'lista_bia',
             'icon' => 'fas fa-list',
         ],
         [

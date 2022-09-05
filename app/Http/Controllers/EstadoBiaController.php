@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCriteriaRequest;
-use App\Http\Requests\UpdateCriteriaRequest;
-use App\Models\Criteria;
-use App\Models\Level;
+use App\Models\EstadoBia;
 use Illuminate\Http\Request;
 
-class CriteriaController extends Controller
+class EstadoBiaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +14,7 @@ class CriteriaController extends Controller
      */
     public function index()
     {
-        // $levels = Level::with('parameters')->get();
-        // return json_encode($levels);
-        return view('admin.criterias.index');
+        //
     }
 
     /**
@@ -29,7 +24,7 @@ class CriteriaController extends Controller
      */
     public function create()
     {
-        return view('admin.criterias.create');
+        //
     }
 
     /**
@@ -40,31 +35,51 @@ class CriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        return json_encode($request);
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\EstadoBia  $estadoBia
+     * @return \Illuminate\Http\Response
+     */
+    public function show(EstadoBia $estadoBia)
+    {
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Criteria  $criteria
+     * @param  \App\Models\EstadoBia  $estadoBia
      * @return \Illuminate\Http\Response
      */
-    public function edit(Criteria $criterio)
+    public function edit(EstadoBia $estadoBia)
     {
-        return view('admin.criterias.edit', compact('criterio'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Criteria  $criteria
+     * @param  \App\Models\EstadoBia  $estadoBia
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCriteriaRequest $request, Criteria $criterio)
+    public function update(Request $request, EstadoBia $estadoBia)
     {
-        $criterio->update($request->validated());
-        return redirect()->route('admin.criterias.index')->with(['message' => 'Criterio Actualizado Exitosamente']);
+        //
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\EstadoBia  $estadoBia
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(EstadoBia $estadoBia)
+    {
+        //
+    }
 }

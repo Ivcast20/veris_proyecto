@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Nuevo BIA')
+@section('title', 'Editar BIA')
 @section('content_header')
     <h1 class="text-center">Editar BIA</h1>
 @stop

@@ -67,6 +67,7 @@ Route::middleware([
     ->only(['index','create','store','edit','update'])
     ->names('admin.criterias');
     
+    Route::view('lista_bia','bia_productos.index');
 });
 
 // Route::middleware(['auth:sactum',
@@ -79,7 +80,7 @@ Route::middleware([
 
 
 Route::get('prueba', function () {
-    return view('emails.new_user_mail');
+    return view('emails.realizar_bia');
 });
 
 Route::get('prueba2', function () {

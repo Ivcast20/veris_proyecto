@@ -9,6 +9,8 @@ use App\Http\Controllers\ProductServiceController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -68,6 +70,15 @@ Route::middleware([
     ->names('admin.criterias');
     
     Route::view('lista_bia','bia_productos.index');
+
+    Route::get('pruebalistbox',function(){
+        $usuarios = User::all(['id','lastname','name']);
+        return view('pruebalist',compact('usuarios'));
+    });
+
+    Route::post('resultado', function(Request $request){
+        return $request;
+    });
 });
 
 // Route::middleware(['auth:sactum',

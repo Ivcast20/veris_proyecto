@@ -1,7 +1,9 @@
 <div>
-    <div class="d-flex justify-content-end">
-        <a class="btn btn-success" href="{{ route('admin.roles.create') }}">Nuevo</a>
-    </div>
+    @can('admin.roles.create')
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-success" href="{{ route('admin.roles.create') }}">Nuevo</a>
+        </div>
+    @endcan
     <div class="card mt-2">
         <div class="card-header">
             <div class="input-group  mb-3">
@@ -33,7 +35,7 @@
                                 <th>{{ __('Nombre') }}</th>
                                 <th>{{ __('Fecha Creación') }}</th>
                                 <th>{{ __('Fecha Actualización') }}</th>
-                                <th>Acciones</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,16 +46,23 @@
                                     <td>{{ $rol->created_at->format('d-m-Y') }}</td>
                                     <td>{{ $rol->updated_at->format('d-m-Y') }}</td>
                                     @if (!$rol->deleted_at)
-                                        <td align="center">
-                                            <a class="btn btn-info"
-                                                href="{{ Route('admin.roles.edit', $rol->id) }}">Editar</a>
-                                            <button class="btn btn-danger"
-                                                wire:click="$emit('deleteRol',{{ $rol->id }})">Eliminar</button>
+                                        <td>
+                                            @can('admin.roles.edit')
+                                                <a class="btn btn-info"
+                                                    href="{{ Route('admin.roles.edit', $rol->id) }}">Editar</a>
+                                            @endcan
+                                            @can('admin.roles.destroy')
+                                                <button class="btn btn-danger"
+                                                    wire:click="$emit('deleteRol',{{ $rol->id }})">Eliminar</button>
+                                            @endcan
                                         </td>
                                     @else
-                                        <td align="center">
-                                            <button class="btn btn-warning"
-                                            wire:click="$emit('restoreRol',{{ $rol->id }})">Restaurar</button>
+                                        <td>
+                                            @can('admin.roles.destroy')
+                                                <button class="btn btn-warning"
+                                                    wire:click="$emit('restoreRol',{{ $rol->id }})">Restaurar</button>
+                                            @endcan
+
                                         </td>
                                     @endif
                                     {{-- <td>

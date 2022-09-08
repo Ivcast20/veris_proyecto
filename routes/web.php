@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware([
-    'auth', //Antes estaba como auth:sanctum auth:web
+    'auth:web', //Antes estaba como auth:sanctum auth:web
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
@@ -25,8 +25,7 @@ Route::middleware([
 
     Route::get('dashboard', function () {
         return view('admin.dashboard');
-    })->name('admin.dashboard')
-        ->can('ver dashboard');
+    })->name('admin.dashboard');
 
     Route::resource('users', UserController::class)
     ->only(['index','create','store','edit','update'])

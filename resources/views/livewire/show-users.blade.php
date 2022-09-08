@@ -1,7 +1,9 @@
 <div>
-    <div class="d-flex justify-content-end">
-        <a class="btn btn-success" href="{{ route('admin.users.create') }}">Nuevo</a>
-    </div>
+    @can('admin.users.create')
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-success" href="{{ route('admin.users.create') }}">Nuevo</a>
+        </div>
+    @endcan
     <div class="card mt-2">
         <div class="card-header">
             <div class="input-group  mb-3">
@@ -44,12 +46,12 @@
                                 <th>{{ __('Fecha Creación') }}</th>
                                 <th>{{ __('Fecha Actualización') }}</th>
                                 <th>{{ __('Estado') }}</th>
-                                <th>Acciones</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
-                                <tr>
+                                <tr class="text-center">
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->lastname }}</td>
@@ -58,16 +60,22 @@
                                     <td>{{ $user->updated_at->format('d/m/Y') }}</td>
                                     <td>{{ $user->deleted_at ? 'Inactivo' : 'Activo' }}</td>
                                     @if (!$user->deleted_at)
-                                        <td align="center">
-                                            <a class="btn btn-info"
-                                                href="{{ Route('admin.users.edit', $user->id) }}">Editar</a>
-                                            <button class="btn btn-danger"
-                                                wire:click="$emit('deleteUser',{{ $user->id }})">Eliminar</button>
+                                        <td>
+                                            @can('admin.users.edit')
+                                                <a class="btn btn-info"
+                                                    href="{{ Route('admin.users.edit', $user->id) }}">Editar</a>
+                                            @endcan
+                                            @can('admin.users.destroy')
+                                                <button class="btn btn-danger"
+                                                    wire:click="$emit('deleteUser',{{ $user->id }})">Eliminar</button>
+                                            @endcan
                                         </td>
                                     @else
-                                        <td align="center">
-                                            <button class="btn btn-warning"
-                                            wire:click="$emit('restoreUser',{{ $user->id }})">Restaurar</button>
+                                        <td>
+                                            @can('admin.users.destroy')
+                                                <button class="btn btn-warning"
+                                                    wire:click="$emit('restoreUser',{{ $user->id }})">Restaurar</button>
+                                            @endcan
                                         </td>
                                     @endif
                                 </tr>

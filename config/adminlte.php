@@ -250,7 +250,6 @@ return [
             'text' => 'Dashboard',
             'route'  => 'admin.dashboard',
             'icon' => 'fas fa-tachometer-alt',
-            'can' => 'ver dashboard',
         ],
         [
             'header' => 'BIA (Análisis de impacto al negocio)'
@@ -268,12 +267,14 @@ return [
             'route'  => 'admin.users.index',
             'icon' => 'fas fa-users',
             'active' => ['users*'],
+            'can' => ['admin.users.index'],
         ],
         [
             'text' => 'Roles',
             'route'  => 'admin.roles.index',
             'icon' => 'fas fa-user-tag',
             'active' => ['roles*'],
+            'can' => ['admin.roles.index'],
         ],
         [
             'header' => 'CONFIGURACIÓN'
@@ -282,37 +283,42 @@ return [
             'text' => 'BIA configuración',
             'route'  => 'admin.biaprocesses.index',
             'icon' => 'fas fa-cogs',
-            'active' => ['bia_processes*']
+            'active' => ['bia_processes*'],
+            'can' => ['admin.bia_process.index'],
         ],
         [
             'text' => 'Categorías de Productos',
             'route'  => 'admin.categories.index',
             'icon' => 'fas fa-cubes',
+            'can' => ['admin.categories.index']
         ],
         [
             'text' => 'Niveles de Calificación',
-            //'url'  => '#',
             'route'  => 'admin.levels.index',
             'icon' => 'fas fa-star',
             'active' => ['levels*'],
-            'icon_color' => 'yellow'
+            'icon_color' => 'yellow',
+            'can' => ['admin.levels.index']
         ],
         [
             'text' => 'Parámetros',
             'route'  => 'admin.parameters.index',
             'icon' => 'fas fa-cogs',
-            'active' => ['parameters*']
+            'active' => ['parameters*'],
+            'can' => ['admin.parameters.index'],
         ],
         [
             'text' => 'Criterios de Impacto',
             'route' => 'admin.criterias.index',
-            'icon_color' => 'green'
+            'icon_color' => 'green',
+            'can' => ['admin.criterias.index']
         ],
         [
             'text' => 'Productos y Servicios',
             'route' => 'admin.products.index',
             'icon' => 'fas fa-clipboard',
             'icon_color' => 'red',
+            'can' => ['admin.products.index'],
         ],
         
         // [

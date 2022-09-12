@@ -22,6 +22,7 @@ class BiaSeeder extends Seeder
                 'fecha_inicio' => Carbon::createFromDate(2022, 5, 30),
                 'fecha_fin' => Carbon::createFromDate(2022, 7, 30),
                 'estado' => true,
+                'estado_bia_process_id' => 1
             ]);
     }
 }

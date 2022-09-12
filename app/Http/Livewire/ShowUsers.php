@@ -6,7 +6,10 @@ use App\Models\User;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use App\Exports\UsersExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 use Livewire\WithPagination;
@@ -74,7 +77,15 @@ class ShowUsers extends Component
         abort_if(!in_array($extension, ['xlsx', 'pdf']), Response::HTTP_NOT_FOUND);
         if($extension == 'pdf')
         {
-            return Excel::download(new UsersExport($this->tipo), 'users.' . $extension, \Maatwebsite\Excel\Excel::DOMPDF);
+            $usuario = Auth::user();
+            $nombreCompleto = $usuario->lastname . ' ' . $usuario->name;
+            $fecha = Carbon::now()->format('d/m/Y');
+            $hora = Carbon::now()->toTimeString();
+            $usuarios = User::withTrashed()->get(['id','name','lastname','created_at','deleted_at']);
+            $pdf = Pdf::loadView('pdf.users', compact('nombreCompleto','fecha','hora','usuarios'))->output();
+            return response()->streamDownload(
+                fn() => print($pdf), Carbon::now()->toDateTimeString() . ' Modulo usuarios.pdf'
+            );
         }else
         {
             return Excel::download(new UsersExport($this->tipo, $extension), 'users.' . $extension);

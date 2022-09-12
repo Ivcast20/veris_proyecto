@@ -1,7 +1,4 @@
 <div>
-    <div class="d-flex justify-content-end">
-        <a class="btn btn-success" href="{{ route('admin.biaprocesses.create') }}">Nuevo</a>
-    </div>
     <div class="card mt-2">
         <div class="card-header">
             <div class="input-group  mb-3">
@@ -34,7 +31,7 @@
                                 <th>{{ __('Fecha de Inicio') }}</th>
                                 <th>{{ __('Fecha de Fin') }}</th>
                                 <th>{{ __('Estado') }}</th>
-                                <th>Acciones</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,10 +45,9 @@
                                     <td>{{ $proceso->estado == 0 ? 'Inactivo' : 'Activo' }}</td>
                                     <td>
                                         <div class="btn-group-vertical">
-                                            <a class="btn btn-info"
-                                                href="{{ Route('admin.biaprocesses.edit', $proceso->id) }}">Editar</a>
-                                            <button class="btn btn-danger"
-                                                    wire:click="$emit('envioCalificar')">Calificar Productos</button>
+                                            <a class="btn btn-info" href="#">Criterios</a>
+                                            <a class="btn btn-success" href="#">Productos/Servicios</a>
+                                            
                                         </div>
                                     </td>
                                 </tr>
@@ -76,28 +72,3 @@
         @endif
     </div>
 </div>
-@push('js')
-    <script>
-        Livewire.on('envioCalificar', () => {
-            Swal.fire({
-                title: 'Confirmar envío correo',
-                text: "¿Está seguro de enviar el correo para la calificacion de productos/servicios? Se deshabilitará el ingreso de: parámetros, niveles, criterios",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emitTo('show-bia-processes', 'envioCalificar');
-                    Swal.fire(
-                        'Correo Enviado!',
-                        'Se ha enviado un correo a todos los usuarios que puedan calificar productos/servicios',
-                        'success'
-                    )
-                }
-            });
-        });
-    </script>
-@endpush

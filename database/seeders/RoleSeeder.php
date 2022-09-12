@@ -144,5 +144,15 @@ class RoleSeeder extends Seeder
             'description' => 'Editar producto/servicio'
         ])->syncRoles([$admin, $director]);
 
+        //Permisos para gestionar ProductScore
+        Permission::create([
+            'name' => 'admin.product_score.index',
+            'description' => 'Ver Calificacion de Productos/Servicios'
+        ])->syncRoles([$comite]);
+        Permission::create([
+            'name' => 'admin.product_score.create',
+            'description' => 'Calificar Productos/Servicios'
+        ])->syncRoles([$comite]);
+
     }
 }

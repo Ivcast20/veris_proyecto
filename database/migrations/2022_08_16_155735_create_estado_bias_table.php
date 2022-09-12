@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        //2022_09_05_155735_create_estado_bias_table
         Schema::create('estado_bias', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion',300);

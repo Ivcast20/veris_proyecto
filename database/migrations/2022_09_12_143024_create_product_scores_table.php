@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bia_processes', function (Blueprint $table) {
+        Schema::create('product_scores', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->text('alcance');
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
-            $table->boolean('estado')->default(true);
-            $table->foreignId('estado_bia_process_id')->constrained('bia_processes');
+            $table->foreignId('product_services_id')->constrained('product_services');
+            $table->foreignId('user_id')->constrained('users');
+            $table->integer('total');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bia_processes');
+        Schema::dropIfExists('product_scores');
     }
 };

@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    @livewire('show-bia-processes')
+    @livewire('bia-productos.show-bia-productos')
 @stop
 
 @section('css')

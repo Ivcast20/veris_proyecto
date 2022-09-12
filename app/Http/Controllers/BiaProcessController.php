@@ -37,8 +37,19 @@ class BiaProcessController extends Controller
      */
     public function store(StoreBiaProcessRequest $request)
     {
-        BiaProcess::create($request->validated());
-        return redirect()->route('admin.biaprocesses.index')->with('success', 'Proceso BIA creado correctamente');
+        //$request->validate();
+        if($request->validated())
+        {
+            BiaProcess::create([
+                'nombre' => $request->nombre,
+                'alcance' => $request->alcance,
+                'fecha_inicio' => $request->fecha_inicio,
+                'fecha_fin' => $request->fecha_fin,
+                'estado' => 1,
+                'estado_bia_process_id' => 1,
+            ]);
+            return redirect()->route('admin.biaprocesses.index')->with('message', 'Proceso BIA creado correctamente');
+        }
     }
 
     /**

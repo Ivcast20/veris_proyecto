@@ -5,12 +5,15 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ParameterController;
+use App\Http\Controllers\ProductScoreController;
 use App\Http\Controllers\ProductServiceController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\Category;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,55 +31,68 @@ Route::middleware([
     })->name('admin.dashboard');
 
     Route::resource('users', UserController::class)
-    ->only(['index','create','store','edit','update'])
-    ->names('admin.users');
+        ->only(['index', 'create', 'store', 'edit', 'update'])
+        ->names('admin.users');
 
     Route::resource('roles', RoleController::class)
-    ->only(['index','create','store','edit','update'])
-    ->names('admin.roles');
+        ->only(['index', 'create', 'store', 'edit', 'update'])
+        ->names('admin.roles');
 
     Route::resource('bia_processes', BiaProcessController::class)
-    ->only(['index','create','store','edit','update'])
-    ->names('admin.biaprocesses');
+        ->only(['index', 'create', 'store', 'edit', 'update'])
+        ->names('admin.biaprocesses');
 
     Route::resource('categories', CategoryController::class)
-    ->only(['index','create','store','edit','update'])
-    ->names('admin.categories');
+        ->only(['index', 'create', 'store', 'edit', 'update'])
+        ->names('admin.categories');
 
 
     //Rutas para los niveles
     Route::get('levels', [LevelController::class, 'index'])
-    ->name('admin.levels.index');
+        ->name('admin.levels.index');
     Route::get('levels/{bia_id}/create', [LevelController::class, 'create'])
-    ->name('admin.levels.create');
-    Route::post('levels', [LevelController::class,'store'])
-    ->name('admin.levels.store');
-    Route::get('levels/{level}/edit', [LevelController::class,'edit'])
-    ->name('admin.levels.edit');
-    Route::put('levels/{level}', [LevelController::class,'update'])
-    ->name('admin.levels.update');
+        ->name('admin.levels.create');
+    Route::post('levels', [LevelController::class, 'store'])
+        ->name('admin.levels.store');
+    Route::get('levels/{level}/edit', [LevelController::class, 'edit'])
+        ->name('admin.levels.edit');
+    Route::put('levels/{level}', [LevelController::class, 'update'])
+        ->name('admin.levels.update');
 
-    Route::resource('parameters',ParameterController::class)
-    ->only(['index','create','store','edit','update'])
-    ->names('admin.parameters');
-    
-    Route::resource('product_services',ProductServiceController::class)
-    ->only(['index','create','store','edit','update'])
-    ->names('admin.products');
+    Route::resource('parameters', ParameterController::class)
+        ->only(['index', 'create', 'store', 'edit', 'update'])
+        ->names('admin.parameters');
+
+    Route::resource('product_services', ProductServiceController::class)
+        ->only(['index', 'create', 'store', 'edit', 'update'])
+        ->names('admin.products');
 
     Route::resource('criterios', CriteriaController::class)
-    ->only(['index','create','store','edit','update'])
-    ->names('admin.criterias');
-    
-    Route::view('lista_bia','bia_productos.index');
+        ->only(['index', 'create', 'store', 'edit', 'update'])
+        ->names('admin.criterias');
 
-    Route::get('pruebalistbox',function(){
-        $usuarios = User::all(['id','lastname','name']);
-        return view('pruebalist',compact('usuarios'));
+    Route::view('lista_bia', 'bia_productos.index');
+
+    Route::get('bia/{id}/product_services_score', [ProductScoreController::class,'index']);
+
+    Route::get('pruebalistbox', function () {
+        $usuarios = User::all(['id', 'lastname', 'name']);
+        return view('pruebalist', compact('usuarios'));
     });
 
-    Route::post('resultado', function(Request $request){
+    Route::post('resultado', function (Request $request) {
         return $request;
+    });
+
+    Route::get('prueba', function () {
+        $usuario = Auth::user();
+        $nombreCompleto = $usuario->lastname . ' ' . $usuario->name;
+        $fecha = Carbon::now()->format('d/m/Y');
+        $hora = Carbon::now()->toTimeString();
+
+        //$pdf = Pdf::loadView('pdf.users', compact('nombreCompleto', 'fecha', 'hora'));
+
+        return json_encode(compact('nombreCompleto', 'fecha', 'hora'));
     });
 });
 
@@ -89,18 +105,13 @@ Route::middleware([
 // });
 
 
-Route::get('prueba', function () {
-    return view('emails.realizar_bia');
-});
+
 
 Route::get('prueba2', function () {
-    $categorias = Category::withCount(['products' => fn($query) => $query->where('bia_process_id',1)])->get();
+    $categorias = Category::withCount(['products' => fn ($query) => $query->where('bia_process_id', 1)])->get();
     $json_resp = [];
-    foreach ($categorias as $categ)
-    {
-        $json_resp[$categ->id] = [
-            
-        ];
+    foreach ($categorias as $categ) {
+        $json_resp[$categ->id] = [];
     }
     return $json_resp;
 });

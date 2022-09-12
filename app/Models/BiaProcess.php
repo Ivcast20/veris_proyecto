@@ -15,6 +15,7 @@ class BiaProcess extends Model
         'fecha_inicio',
         'fecha_fin',
         'estado',
+        'estado_bia_process_id'
     ];
 
     // protected $casts = [

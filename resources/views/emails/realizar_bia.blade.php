@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{{-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0"> 
  <head> 
   <meta charset="UTF-8"> 
@@ -296,4 +296,19 @@ a[x-apple-data-detectors] {
    </table> 
   </div>  
  </body>
+</html> --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Veris SGCN</title>
+</head>
+<body>
+  <h1>Comunicado</h1>
+  <p>Se ha terminado el proceso de parametrización del BIA. Por favor como siguiente paso del proceso deberá realizar
+    la calificación de los productos y servicios definidos para el mismo.
+  </p>
+</body>
 </html>

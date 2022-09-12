@@ -28,9 +28,18 @@ class DatabaseSeeder extends Seeder
             'name' => 'Director',
             'lastname' => 'Director',
             'email' => 'ivanfrancisco_20@outlook.com',
-            'password' => 'Director123-'])->assignRole('director');
+            'password' => 'Director123-'
+        ])->assignRole('director');
+
+        $comite = User::create([
+            'name' => 'Comite',
+            'lastname' => 'Comite ejemplo',
+            'email' => 'ivanuees@gmail.com',
+            'password' => 'Comit123-'
+        ])->assignRole('comite');
 
         //User::factory(100)->create();
+        $this->call(EstadoBiaSeeder::class);
         $this->call(BiaSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(LevelSeeder::class);
